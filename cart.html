@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ตะกร้าสินค้า - Protien Diet24</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            padding: 20px;
+        }
+
+        .cart-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-container h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .cart-table th,
+        .cart-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .cart-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .cart-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .total-price {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .note {
+            font-style: italic;
+            color: #555;
+        }
+
+        .actions {
+            text-align: center;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        #printCart {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 20px auto;
+        }
+
+        #printCart:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cart-container">
+        <h1>ตะกร้าสินค้า</h1>
+        <div id="cart">
+            <!-- ตะกร้าสินค้าจะถูกแสดงที่นี่โดย JavaScript -->
+            <p>ไม่มีสินค้าในตะกร้า</p>
+        </div>
+        <button id="printCart">พิมพ์ใบเสร็จ</button>
+    </div>
+
+    <script src="cart.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Protien Diet24</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+        .no-select {
+            -webkit-user-select: none;
+            /* Safari 3+, iOS Safari 3+ */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            user-select: none;
+            /* Standard */
+        }
+
+        html {
+            font-family: 'Inter', sans-serif;
+            /* ใช้ Inter สำหรับภาษาอังกฤษ */
+        }
+
+        /* ใช้ Prompt สำหรับข้อความภาษาไทย */
+        html[lang="th"] {
+            font-family: 'Prompt', sans-serif;
+            /* ฟอนต์ภาษาไทย */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Prompt', sans-serif;
+        }
+
+
+        :root {
+            --third-text-color: #e1580e;
+            --secondary-text-color: #f23030;
+            --primary-text-color: #637381;
+            --bg-color: #ffff;
+            --dark-text-color: #111928;
+            --primary-text: 48px;
+            --secondary-text: 28px;
+        }
+
+
+        .container {
+            max-width: 1170px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+            gap: 20px;
+
+            h1 {
+                font-size: 42px;
+                position: absolute;
+                top: 115%;
+                font-weight: 400;
+            }
+
+        }
+
+        nav {
+            background-color: var(--bg-color);
+            position: relative;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: auto;
+            padding: 20px 30px;
+
+
+            .icons {
+                display: flex;
+                justify-content: right;
+                align-items: center;
+                margin: 0 20px;
+                padding: 0 15px;
+                text-decoration: none;
+                color: var(--primary-text-color);
+            }
+
+            .icons a {
+                font-size: 28px;
+                padding: 0 15px;
+                text-decoration: none;
+                color: var(--primary-text-color);
+                transition: color 0.3s ease;/
+            }
+
+            .icons a:hover {
+                color: var(--third-text-color);/
+            }
+        }
+
+        .logo {
+            a {
+                color: var(--dark-text-color);
+                text-decoration: none;
+            }
+
+            .img-logo {
+                position: relative;
+                left: 0;
+                width: 50px;
+                height: 50px;
+                border-radius: 14px;
+            }
+
+            .img-logo:hover {
+                transition: 300ms ease;
+                filter: blur(2px);
+            }
+        }
+
+        .menu {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            flex: 1;
+            margin: 0;
+        }
+
+        .menu li {
+            margin-left: 20px;
+            padding: 0px 0;
+            margin-bottom: 20px;
+            margin-top: 15px;
+        }
+
+        .menu li a {
+            color: var(--primary-text-color);
+            text-decoration: none;
+        }
+
+        .menu li a.home {
+            color: var(--third-text-color);
+        }
+
+        .menu li a.home:hover {
+            transition: color 300ms ease;
+            color: var(--secondary-text-color);
+        }
+
+        .menu li a:hover {
+            transition: color 300ms ease;
+            color: var(--dark-text-color);
+        }
+
+        @media only screen and (max-width: 480px) {
+            .nav-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .menu {
+                display: none;
+                flex-direction: column;
+                margin-top: 20px;
+                width: 100%;
+            }
+
+            .icons {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                width: 100%;
+                margin-top: 20px;
+                position: absolute;
+                right: 35px;
+                top: 25px;
+            }
+
+            .icons a {
+                font-size: 28px;
+                padding: 0 15px;
+                color: var(--primary-text-color);
+                transition: color 0.3s ease;
+            }
+
+            .icons a:hover {
+                color: var(--third-text-color);
+            }
+
+        }
+
+        .hamburger-Icon {
+            display: inline-block;
+            cursor: pointer;
+            position: absolute;
+            right: 25px;
+
+            @media only screen and (min-width: 480px) {
+                display: none;
+            }
+
+        }
+
+        .bar1,
+        .bar2,
+        .bar3 {
+            width: 35px;
+            height: 5px;
+            background-color: #333;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        .change .bar1 {
+            transform: translate(0, 11px) rotate(-45deg);
+        }
+
+        .change .bar2 {
+            opacity: 0;
+        }
+
+        .change .bar3 {
+            transform: translate(0, -11px) rotate(45deg);
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+        }
+
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        .product {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .product h5 {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .add-to-cart {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background-color: #218838;
+        }
+
+        .cart {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .cart img {
+            margin-top: -5px;
+        }
+
+        #cart p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        #printCart {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #printCart:hover {
+            background-color: #0056b3;
+        }
+
+        .product img {
+            border-radius: 8px;
+        }
+
+        input[type="number"] {
+  width: 60px;
+  padding: 5px;
+  text-align: center;
+}
+
+.cart table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.cart th, .cart td {
+  padding: 10px;
+  text-align: left;
+}
+
+.cart th {
+  background-color: #f2f2f2;
+}
+
+.cart button {
+  margin: 5px;
+}
+
+.container mt-5{
+    margin-top: 5rem;
+    }
+    
+            /* Responsive */
+            @media (max-width: 768px) {
+                .container {
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                }
+}
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <nav>
+                <div class="container">
+                    <div class="nav-wrapper">
+                        <div class="logo">
+                            <a href="index.html">
+                                <img class="img-logo"
+                                    src="https://scontent.fkdt2-1.fna.fbcdn.net/v/t39.30808-6/439222632_945151810951743_4301161659542962869_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHOnhX5XRdH6fKFOgPon3HPC7tWg-oLaeELu1aD6gtp4el6jnRsOoSJFwpB0IM8ysDXXhzEcQAABNwjgMs-XwiW&_nc_ohc=vF4APyDXorMQ7kNvgEQDoCV&_nc_oc=AdiQdktrpPgJ6WPOPn6L-ks6yRovdnECt6kKb5znyGEDajYFUcwyQg9QqlRpa2eCAZw&_nc_zt=23&_nc_ht=scontent.fkdt2-1.fna&_nc_gid=AJ9hIcb-ReQhEls-uBhOs9q&oh=00_AYBU0npPN1MZnDHfkcCDITmbtAmHlrcs-3-hLGHJLa5YmA&oe=67CDE06C"
+                                    alt="Logo">
+                            </a>
+                        </div>
+                        <div class="hamburger-Icon" id="hamIcon" onclick="toggleHamburgerIcon(this)">
+                            <div class="bar1"></div>
+                            <div class="bar2"></div>
+                            <div class="bar3"></div>
+                        </div>
+                        <ul class="menu" id="myMenu">
+                            <li><a href="index.html" class="home">Home</a></li>
+                            <li><a href="shop.html">สั่งข้าว</a></li>
+                            <li><a href="shop2.html">สั่งน้ำ</a></li>
+                            <li><a href="shop3.html">อื่นๆ</a></li>
+                        </ul>
+                        <div class="icons">
+                            <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                            <a href="#"><i class="fas fa-search"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </nav>
+    </header>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="logo">
+                    <h1>อาหารคลีน!</h1>
+                </div>
+<div class="col-md-8">
+    <div class="cart" id="cart">
+        <h2>ตะกร้าสินค้า</h2>
+        <p>ไม่มีสินค้าในตะกร้า</p>
+
+    </div>
+    <button id="printCart">ยืนยันการสั่งซื้อ</button>
+</div>
+</div>
+                <div id="products" class="row">
+                    <!-- Product 1 -->
+                    <div class="col-md-4 product">
+                        <img src="https://scontent.fkdt2-1.fna.fbcdn.net/v/t39.30808-6/445464165_973597611440496_2355585923311186455_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHzoCiSRRtW2JJ1n9T7QpbpKfPwbgWX_n8p8_BuBZf-f6g6H6-NUMEK-wWR4e4rgw_bHqLPofKZHH-XJ7A348u7&_nc_ohc=O6gG3-7n6yUQ7kNvgHyqejM&_nc_oc=Adjn-Iri2QNGpGHi5in8zFrkq4Rz-ki61-d4_4YqXV84EmSUxl8DgYffCC-FFC_5mhY&_nc_zt=23&_nc_ht=scontent.fkdt2-1.fna&_nc_gid=AXjalEyleKYC4WjfFKG1xO2&oh=00_AYDKJEhwYV088SGXDw_TASappZ7fRlD_N7REXZsb0agy5A&oe=67CFB89E"
+                            alt="Product 1 Image" />
+                        <h5>กะเพราหมูสับ ไข่ข้นราดข้าว<br>$69</h5>
+                        <button class="btn add-to-cart" data-product-id="กะเพราหมูสับ ไข่ข้นราดข้าว" data-price="69">Add
+                            to
+                            Cart</button>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="col-md-4 product">
+                        <img src="https://scontent.fkdt2-1.fna.fbcdn.net/v/t39.30808-6/445544602_973597604773830_8417991626411313116_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHphSMR4VCTPed4UQiNAaz57V_59EJ3OCDtX_n0Qnc4IO2JnGX0WHyWnQ6OO_8AYtoD6yK9yBOahxhQ-SYwpx8P&_nc_ohc=GttwZEHzpAQQ7kNvgEENA0u&_nc_oc=AdiNApHgSIjyI1GmkD1XQ5xzuAuhwvmamSi7QEYpXugaPHvYd_g0OOvvnwrBDd8QoKQ&_nc_zt=23&_nc_ht=scontent.fkdt2-1.fna&_nc_gid=AodF415c2DCqJLJsgu138jL&oh=00_AYB_aYOJ9osfVaW-7TT5zia5k3dtAS_MDddUpE4OSKscXQ&oe=67CFA750"
+                            alt="Product 2 Image" />
+                        <h5>หมูคั่วกากเจียว<br>$69</h5>
+                        <button class="btn add-to-cart" data-product-id="หมูคั่วกากเจียว" data-price="69">Add to
+                            Cart</button>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="col-md-4 product">
+                        <img src="https://scontent.fkdt2-1.fna.fbcdn.net/v/t39.30808-6/441932704_973597561440501_5994024219817889047_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHhOIigPsC5jLyFPfGhyxfxhEGRXidlLeyEQZFeJ2Ut7H1vmIsoLswpNovG2tYXrhQtaYlXUIlPexYsmSm4-CVr&_nc_ohc=R1y2Q-_WkpkQ7kNvgHTBCV_&_nc_oc=Adj_EUUQfgokWqUM1-hPlSWzcgt8F7bfSAS1dQH5jitcAdz7TlXfK9Vjk2LH-KuZ7-M&_nc_zt=23&_nc_ht=scontent.fkdt2-1.fna&_nc_gid=Aa7f4NqR79xYZfgqYjuPIKx&oh=00_AYDwsSGgyc-ZvEZnpm91NOGJTUXl9BYOtNCkAbJfrYvxcA&oe=67CFB939"
+                            alt="Product 3 Image" />
+                        <h5>มาม่าคั่วกะเพราหมูสับ พริกขี้หนู<br>$79</h5>
+                        <button class="btn add-to-cart" data-product-id="มาม่าคั่วกะเพราหมูสับ พริกขี้หนู"
+                            data-price="79">Add to
+                            Cart</button>
+                    </div>
+
+                    <!-- Product 4 -->
+                    <div class="col-md-4 product">
+                        <img src="https://scontent.fkdt2-1.fna.fbcdn.net/v/t39.30808-6/439920983_954001246733466_7317777503518742416_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHWVxsguw-Fi2qxwhw5TOzaFHAS7fWFYUsUcBLt9YVhSxf6EBpLa_pRO0U0SJmwzjSNV5hd7gkfrkO9YWbC5hq-&_nc_ohc=38Wuf7Hse2QQ7kNvgEW9pUn&_nc_oc=Adj1T3DTUpKs0-w75AXxJ23_tOn5CHiDZ8GY0nWBh7QORPznbd7iZfowP1F4uRNgMh8&_nc_zt=23&_nc_ht=scontent.fkdt2-1.fna&_nc_gid=ANxlS_0RV7I7sujBZ4gGYtm&oh=00_AYDqFkI0nZUmtlA1w6EzYyuqBYMyIExBc_e4A7pzyXqL-w&oe=67CF9D51"
+                            alt="Product 4 Image" />
+                        <h5>อกไก่นุ่ม กะเพรา<br>$40</h5>
+                        <button class="btn add-to-cart" data-product-id="อกไก่นุ่ม กะเพรา" data-price="69">Add to
+                            Cart</button>
+                    </div>
+
+                    <!-- Product 5 -->
+                    <div class="col-md-4 product">
+                        <img src="https://scontent.fkdt2-1.fna.fbcdn.net/v/t39.30808-6/418732582_871296805003911_9015658954002380383_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFznAniYqwyFa6chW2keb2T3F8r0PU4HircXyvQ9TgeKpHlKUXLqKWCG_H4UxwpDmAX9QcTiJ037xJJ5sKJsErz&_nc_ohc=r-2F-UF47KMQ7kNvgHcbNbE&_nc_oc=Adh2c1kORRv1K-PFZhABb7L9GXEjcHI31vjM1EHbm6iMMAE5n_uHwlhIzjKay9YElx4&_nc_zt=23&_nc_ht=scontent.fkdt2-1.fna&_nc_gid=AJFTCpOOvNCbuuQaa-F03R1&oh=00_AYCzf8h0ImdVB9zGMOQbWU3PIrmC-bMZnDB_qLbM6Pv1Lg&oe=67CF9C3B"
+                            alt="Product 5 Image" />
+                        <h5>อาหารคลีนแบบพิเศษ<br>$50</h5>
+                        <button class="btn add-to-cart" data-product-id="อาหารคลีนแบบพิเศษ" data-price="69">Add to
+                            Cart</button>
+                    </div>
+
+                    <!-- Add more products if needed -->
+
+                </div>
+            </div>
+    </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="cart.js"></script>
+
+</body>
+
+</html>
