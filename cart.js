@@ -220,9 +220,56 @@ document.getElementById("printCart")?.addEventListener("click", () => {
 function generateCartReceipt() {
   let receiptContent = `
     <style>
-      /* CSS สำหรับใบเสร็จ */
+      body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      th, td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: center;
+      }
+      th {
+        background-color: #f4f4f4;
+      }
+      .total-price {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+      .footer {
+        margin-top: 30px;
+        font-size: 14px;
+        color: #555;
+      }
+      .store-name {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+      .qr-code {
+        margin-top: 20px;
+        height: 100px;
+        width: 100px;
+        background-color: #f4f4f4;
+        text-align: center;
+        line-height: 100px;
+        font-size: 14px;
+        color: #aaa;
+        margin-left: auto;
+        margin-right: auto;
+      }
     </style>
-    <h2>ใบเสร็จรับเงิน</h2>
+    <h2 class="store-name">Protein Diet24</h2>
+    <h3>ใบเสร็จรับเงิน</h3>
+    <p>วันที่และเวลา: ${new Date().toLocaleString()}</p>
     <table>
       <thead>
         <tr>
@@ -265,6 +312,10 @@ function generateCartReceipt() {
       โทร: 088-888-8888<br>
       ที่อยู่: 123 ถนนสุขุมวิท, กรุงเทพฯ
     </div>
+    <div class="qr-code">
+      QR Code
+      <img src="qr.png" alt="QR Code">
+    </div>
   `;
 
   return receiptContent;
@@ -278,7 +329,52 @@ function printReceipt(title, content) {
       <head>
         <title>${title}</title>
         <style>
-          /* CSS สำหรับพิมพ์ใบเสร็จ */
+          body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+          }
+          table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+          }
+          th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+          }
+          th {
+            background-color: #f4f4f4;
+          }
+          .total-price {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+          }
+          .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #555;
+          }
+          .store-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+          }
+          .qr-code {
+            margin-top: 20px;
+            height: 100px;
+            width: 100px;
+            background-color: #f4f4f4;
+            text-align: center;
+            line-height: 100px;
+            font-size: 14px;
+            color: #aaa;
+            margin-left: auto;
+            margin-right: auto;
+          }
         </style>
       </head>
       <body>
