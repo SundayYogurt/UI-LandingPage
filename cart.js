@@ -312,10 +312,9 @@ function generateCartReceipt() {
       โทร: 088-888-8888<br>
       ที่อยู่: 123 ถนนสุขุมวิท, กรุงเทพฯ
     </div>
-    <div class="qr-code">
-      QR Code
-      <img src="qr.png" alt="QR Code">
-    </div>
+ 
+      <img class="qr-code" src="qr.png" alt="QR Code">
+
   `;
 
   return receiptContent;
